@@ -10,6 +10,137 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const generatedTeam = [];
+
+function init() {
+    inquirer
+        .prompt([{
+                type: "input",
+                name: "name",
+                message: "What is your Manager's name?",
+            },
+            {
+                type: "input",
+                name: "id",
+                message: "What is your Manager's Id number?",
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "What is your Manager's email?",
+            },
+            {
+                type: "input",
+                name: "office",
+                message: "What is your Manager's office number?",
+            }
+        ])
+        .then(function (employeeManager) {
+            // create manager card
+
+            generatingTeam()
+        })
+};
+
+function generatingTeam() {
+    inquirer
+        .prompt([{
+            type: "list",
+            name: "command",
+            message: "Would you like to add more team members?",
+            choices: ["Add an Engineer", "Add an Intern", "Make team"]
+        }])
+        .then(answers => {
+            // create a switch statement to choose between engineer, intern, or build team
+            statement = answers.command;
+
+            switch (statement) {
+                case "Add an Engineer":
+                    addEngineer();
+                    break;
+
+                case "Add an Intern":
+                    addIntern();
+                    break;
+
+                case "Make team":
+                    makeTeam();
+                    break;
+            }
+        })
+};
+
+function addEngineer() {
+    inquirer
+        .prompt([{
+                type: "input",
+                name: "name",
+                message: "What is your Engineer's name?",
+            },
+            {
+                type: "input",
+                name: "id",
+                message: "What is your Engineer's Id number?",
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "What is your Engineer's email?",
+            },
+            {
+                type: "input",
+                name: "github",
+                message: "What is your Engineer's GitHub?",
+            }
+        ])
+        .then(function (employeeManager) {
+            // create manager card
+
+            generatingTeam()
+        })
+};
+
+function addIntern() {
+    inquirer
+        .prompt([{
+                type: "input",
+                name: "name",
+                message: "What is your Intern's name?",
+            },
+            {
+                type: "input",
+                name: "id",
+                message: "What is your Intern's Id number?",
+            },
+            {
+                type: "input",
+                name: "email",
+                message: "What is your Intern's email?",
+            },
+            {
+                type: "input",
+                name: "school",
+                message: "What is your Intern's school?",
+            }
+        ])
+        .then(function (employeeManager) {
+            // create manager card
+
+            generatingTeam()
+        })
+};
+
+function makeTeam() {
+
+};
+
+init();
+
+
+
+
+
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
