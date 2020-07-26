@@ -6,4 +6,4 @@ This Node CLI is builds a team based on the Users inputs. The user will answer a
 
 ## Pics
 
-![](Screen%20Shot%202020-07-25%20at%209.35.08%20PM.png)
+![](images/Screen%20Shot%202020-07-25%20at%209.35.08%20PM.png)
