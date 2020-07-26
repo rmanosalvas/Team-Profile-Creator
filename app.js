@@ -31,12 +31,14 @@ function init() {
             },
             {
                 type: "input",
-                name: "office",
+                name: "officeNumber",
                 message: "What is your Manager's office number?",
             }
         ])
-        .then(function (employeeManager) {
+        .then(function (data) {
             // create manager card
+            var manager = new Manager(data.name, data.id, data.email, data.officeNumber);
+            generatedTeam.push(manager);
 
             generatingTeam()
         })
@@ -46,13 +48,13 @@ function generatingTeam() {
     inquirer
         .prompt([{
             type: "list",
-            name: "command",
+            name: "teamMember",
             message: "Would you like to add more team members?",
             choices: ["Add an Engineer", "Add an Intern", "Make team"]
         }])
-        .then(answers => {
+        .then(function (answers) {
             // create a switch statement to choose between engineer, intern, or build team
-            statement = answers.command;
+            statement = answers.teamMember;
 
             switch (statement) {
                 case "Add an Engineer":
@@ -93,8 +95,10 @@ function addEngineer() {
                 message: "What is your Engineer's GitHub?",
             }
         ])
-        .then(function (employeeManager) {
-            // create manager card
+        .then(function (data) {
+            // create Engineer card
+            var engineer = new Engineer(data.name, data.id, data.email, data.github);
+            generatedTeam.push(engineer);
 
             generatingTeam()
         })
@@ -123,15 +127,16 @@ function addIntern() {
                 message: "What is your Intern's school?",
             }
         ])
-        .then(function (employeeManager) {
+        .then(function (data) {
             // create manager card
-
+            var intern = new Intern(data.name, data.id, data.email, data.school);
+            generatedTeam.push(intern);
             generatingTeam()
         })
 };
 
 function makeTeam() {
-
+    fs.writeFileSync(outputPath, render(generatedTeam), "utf-8");
 };
 
 init();
@@ -163,4 +168,4 @@ init();
 // and Intern classes should all extend from a class named Employee; see the directions
 // for further information. Be sure to test out each class and verify it generates an
 // object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
+// for the provided `render` function to work! 
